@@ -41,3 +41,11 @@ For full credit on each challenge, you must include:
 5. Build a Kibana dashboard to visualize with a chart counts of grade distribution (A,A-,B+, etc...) by the student's program (DS, IS), along with another that plots grade distribution by course.
 6. Create another dashboard with a dropdown to filter by student. For the selected student, display the course, grade and course learning outcomes in a table.
 
+## Turning it in
+
+You should turn in a Word Document to Blackboard with the following:
+- Your name, SU email, and IST769 F21 Midterm at the top
+- An overview / summary section of how you approached this problem, including any assumptions you made about the problem itself (if any). 
+- For each challenge question, include the question number, question itself, and your answer.
+- For full credit make sure your answer meets the requirements above.
+- If you cannot figure something out, do your best to write up what you are trying to do and include with that as many specifics as possible as to why you could not get it done. This can only help your evaluation.
