@@ -19,7 +19,10 @@ The iSchool has hired you as a data scientist to help them analyze the data from
 - Course and program data can be found in the MongoDb database `ischool` under the `courses` and `programs` collections respectively.
 - The Student enrollment data can be found in the Cassandra database named `ischool` under the `enrollments` table.
 
-I suggest getting familiar with the data prior to attempting to solve the problems. Do this by querying the data in Spark or Drill to get a sense of the layout and properties of the data. This is considered part of the exam and necessary to complete the challenges.
+## Tips
+
+- I suggest getting familiar with the data prior to attempting to solve the problems. Do this by querying the data in Spark or Drill to get a sense of the layout and properties of the data. This is considered part of the exam and necessary to complete the challenges.
+- If you use Spark or Drill you will need to configure the required jars or storage plugins. I recommend figuring this out first, following the labs. You will need MongoDb, Cassandra, Neo4j, and Elasticsearch.
 
 ## Requirements
 
