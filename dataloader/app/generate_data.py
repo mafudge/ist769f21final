@@ -280,6 +280,7 @@ if __name__ == '__main__':
 
     logging.info("Writing data to MongoDB...")
     client = MongoClient(CONNECTION_STRING)
+    client.drop_database('ischooldb')
     db = client.ischooldb
     db.courses.insert_many(courses)
     db.programs.insert_many(programs)

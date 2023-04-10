@@ -9,8 +9,8 @@ services:
     environment:
       DELAY: ${DELAY:-2}
       PASSWORD: ${PASSWORD:-SU2orange!}
-    #entrypoint: ["/bin/bash", "-c", "/app/run.sh"]
-    entrypoint: ["/bin/bash"]
+    entrypoint: ["/bin/bash", "-c", "/app/run.sh"]
+    #entrypoint: ["/bin/bash"]
     depends_on:
       - drill
       - jupyter 

@@ -5,10 +5,6 @@ RUN apt-get update && apt-get install -y \
     curl \
     wget \
     nano
-# RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
-# RUN curl https://packages.microsoft.com/config/ubuntu/20.04/prod.list | tee /etc/apt/sources.list.d/msprod.list
-# RUN apt-get update && ACCEPT_EULA=Y apt-get install -y mssql-tools unixodbc-dev    
-RUN wget -qO - https://www.mongodb.org/static/pgp/server-6.0.asc | apt-key add -
 
 RUN curl https://dl.min.io/client/mc/release/linux-amd64/mc \
     --create-dirs -o /usr/local/bin/mc &&  \
