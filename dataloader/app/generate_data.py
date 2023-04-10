@@ -2,10 +2,11 @@ import random
 import pandas as pd
 import requests 
 import logging 
+import json
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 random.seed(42)
 
-grades = { "A" : 4.0, "A-" : 3.667, "B+": 3.333, "B": 3.0 , "B-" : 2.667, "C+" : 2.333 ,"C": 3.0}
+grades = { "A" : 4.0, "A-" : 3.667, "B+": 3.333, "B": 3.0 , "B-" : 2.667, "C+" : 2.333 ,"C": 2.0}
 
 grade_dists = [
     { 'code' : 'IST659', 'prereq' : [],  'program' : ['IS', 'DS'], 'values' : [60,22,8,3,3,2,2] },
@@ -37,10 +38,10 @@ program_dists = [
 ]
 
 terms = [
-    { 'code' : '1221', 'name' : 'Fall 2021' },
-    { 'code' : '1222', 'name' : 'Spring 2022' },
-    { 'code' : '1231', 'name' : 'Fall 2022' },
-    { 'code' : '1232', 'name' : 'Spring 2023' }
+    { '_id' : '1221', 'code' : '1221', 'name' : 'Fall 2021' },
+    { '_id' : '1222', 'code' : '1222', 'name' : 'Spring 2022' },
+    { '_id' : '1231', 'code' : '1231', 'name' : 'Fall 2022' },
+    { '_id' : '1232', 'code' : '1232', 'name' : 'Spring 2023' }
 ]
 
 programs = [
@@ -225,9 +226,9 @@ def generate_students(program_dists):
 def generate_enrollments(sections, students, grade_dists):
     enrollments = []
     for section in sections[:]:
-        logging.info(section)
+        # logging.info(section)
         grade_dist = [ gd for gd in grade_dists if gd['code']==section['course']][0]
-        logging.info(grade_dist)
+        # logging.info(grade_dist)
         n = 0 
         while n < section['enrollment']:
             student = random.choice(students)
@@ -247,17 +248,41 @@ def generate_enrollments(sections, students, grade_dists):
                             'grade' : letter,
                             'grade_points' : grades[letter]
                         }
-                        logging.info(enrollment)
+                        # logging.info(enrollment)
                         enrollments.append(enrollment)
      
     return enrollments
 
+def save_json(data, filename):
+    with open(filename, 'w') as outfile:
+        json.dump(data, outfile, indent=4)
+
+def save_csv(data, filename):
+    df = pd.DataFrame(data)
+    df.to_csv(filename, index=False)
 
 if __name__ == '__main__':
-    sections =   generate_sections(terms, section_dists)
-    sections_df = pd.DataFrame(sections)
-    print(sections_df)
+    from pymongo import MongoClient
+    logging.info("Generating data...")
+    DATAPATH = "data/"
     students = generate_students(program_dists)
-    students_df = pd.DataFrame(students)
+    sections =   generate_sections(terms, section_dists)
     enrollments = generate_enrollments(sections, students, grade_dists)
-    print(len(enrollments))
+    logging.info("Saving data...")
+    save_json(students, DATAPATH + "students.json")
+    save_json(courses,DATAPATH + "courses.json")
+    save_json(programs, DATAPATH + "programs.json")
+    save_json(terms, DATAPATH + "terms.json")
+    save_csv(sections, DATAPATH + "sections.csv")
+    save_csv(enrollments, DATAPATH + "enrollments.csv")
+
+    CONNECTION_STRING = "mongodb://admin:mongopw@mongo:27017"
+
+    logging.info("Writing data to MongoDB...")
+    client = MongoClient(CONNECTION_STRING)
+    db = client.ischooldb
+    db.courses.insert_many(courses)
+    db.programs.insert_many(programs)
+    db.terms.insert_many(terms)
+    db.students.insert_many(students)
+
