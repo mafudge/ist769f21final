@@ -1,28 +1,51 @@
-# IST769 Fall 2021 Final Exam
+# IST769 Spring 2023 Final Exam
 
-## Getting Started
+## Front Matter 
 
-To get started:
+### Important Disclaimer
 
-1. Open a terminal window (it is highly recommended that you use vLab to complete this exam).
-2. Clone this repository: `git clone https://github.com/mafudge/ist769f21final`
-3. Change into the directory: `cd ist769f21final`
+**This is an open book EXAM. The intent is to measure your knowledge of the course material. You are expected to work on this on your own. The exam period begins when this document is released.**
+
+**Allowed During the Exam Period:**
+
+- All Resources from this class.
+- Content from the internet (pages, videos, posted stack overflow, questions, etc., generally anything you can find with a web search).
+- Whatever we discuss in class on Monday.
+- Asking the instructor for clarification on the Teams Channel ONLY (so everyone sees it).
+
+**NOT Allowed During the Exam Period:**
+
+- Bouncing ideas off your classmates, or collaborating on approaches. 
+- Asking another human for clarification, advice, interpretation, or suggestions whether in person or online, whether synchronously or asynchronously.
+- Solutions that use code we didn't learn in the class. Stick to Pyspark SQL, Pyspark Dataframes API, and SQL in Drill. No spark RDD or regular Python.
+- Use of test aid websites like Chegg, Coursehero, etc. These won't be helpful, and they are evil anyways.
+
+### Getting Started
+
+Is highly recommended that you use vLab to complete this exam. If you don't you're on your own regarding getting this working on your own computer.
+
+1. Check if there are containers running: `PS> docker ps`
+2. Stop any running containers: `PS> docker ps -q | % { docker stop $_ }`
+2. Clone this repository: `git clone https://github.com/mafudge/ist769sp23final`
+3. Change into the repository directory: `cd ist769sp23final`
 4. Bring up the docker environment: `docker-compose up -d`
-5. Get the Jupyter Url `docker-compose logs jupyter`
-6. Open Jupyter; open the `load-initial-data.ipynb` notebook in the `work` folder.
-7. Run the notebook to install the data to the databases.
+5. The data loader service `dataloader` will import data into the databases to begin. To check on its status: `docker-compose logs dataloader`
 
 ## The iSchool Data Scientist
 
-The iSchool has hired you as a data scientist to help them analyze the data from their student enrollment system. You have been asked to make sense of the relationships hidden within the data.
+The iSchool has hired you as a data scientist to help them analyze the data from their student enrollment system. You have been asked to make sense of the relationships hidden within the data. Specifically you have been asked to analyze the ADS (Applied Data Science) and IS (Information Systems) programs. You have been provided with the following data sources:
 
 - Course and program data can be found in the MongoDb database `ischool` under the `courses` and `programs` collections respectively.
-- The Student enrollment data can be found in the Cassandra database named `ischool` under the `enrollments` table.
+- The Student enrollment data was extracted to Minio, and can be found in the `enrollments` bucket.
 
-## Tips
+### Tips
 
-- I suggest getting familiar with the data prior to attempting to solve the problems. Do this by querying the data in Spark or Drill to get a sense of the layout and properties of the data. This is considered part of the exam and necessary to complete the challenges.
-- If you use Spark or Drill you will need to configure the required jars or storage plugins. I recommend figuring this out first, following the labs. You will need MongoDb, Cassandra, Neo4j, and Elasticsearch.
+**Unlike the midterm exam, less will be provided for you**
+
+- I suggest getting familiar with the data prior to attempting to solve the problems. Do this by querying the data using mongodb, Spark or Drill to get a sense of the layout and properties of the data. This is considered part of the exam and necessary to complete the challenges. 
+- If you use Spark or Drill you will need to configure the required jars or storage plugins. I recommend figuring this out first, following the labs. You will need MongoDb, Cassandra, Neo4j, and Elasticsearch. 
+
+
 
 ## Requirements
 

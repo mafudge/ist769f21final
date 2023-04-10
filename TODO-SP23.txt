@@ -1,0 +1,7 @@
+# add redis cache for course descriptions as scrape from course catalog
+# Add a couple more questions, including loading entire semesters into the database.
+# build docker container to load in data.
+# add more data and make things more complex
+
+# NO KAFKA
+
