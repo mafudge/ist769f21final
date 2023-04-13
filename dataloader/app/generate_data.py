@@ -3,8 +3,12 @@ import pandas as pd
 import requests 
 import logging 
 import json
+import os
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-random.seed(42)
+
+seed = int(os.environ.get('SEED', 42))
+random.seed(seed)
+logging.info(f"Random number seed: {seed}")
 
 grades = { "A" : 4.0, "A-" : 3.667, "B+": 3.333, "B": 3.0 , "B-" : 2.667, "C+" : 2.333 ,"C": 2.0}
 
@@ -38,10 +42,10 @@ program_dists = [
 ]
 
 terms = [
-    { '_id' : '1221', 'code' : '1221', 'name' : 'Fall 2021' },
-    { '_id' : '1222', 'code' : '1222', 'name' : 'Spring 2022' },
-    { '_id' : '1231', 'code' : '1231', 'name' : 'Fall 2022' },
-    { '_id' : '1232', 'code' : '1232', 'name' : 'Spring 2023' }
+    { '_id' : '1221', 'code' : '1221', 'name' : 'Fall 2021', 'semester' : 'Fall', 'year' : 2021, 'academic_year' : '2021-2022' },
+    { '_id' : '1222', 'code' : '1222', 'name' : 'Spring 2022', 'semester' : 'Spring', 'year' : 2022, 'academic_year' : '2021-2022'  },
+    { '_id' : '1231', 'code' : '1231', 'name' : 'Fall 2022', 'semester' : 'Fall', 'year' : 2022, 'academic_year' : '2022-2023'  },
+    { '_id' : '1232', 'code' : '1232', 'name' : 'Spring 2023', 'semester' : 'Spring', 'year' : 2023, 'academic_year' : '2022-2023'  }
 ]
 
 programs = [

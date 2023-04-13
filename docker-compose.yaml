@@ -9,7 +9,8 @@ services:
     environment:
       DELAY: ${DELAY:-2}
       PASSWORD: ${PASSWORD:-SU2orange!}
-    entrypoint: ["/bin/bash", "-c", "/app/run.sh"]
+      SEED: ${SEED:-42}
+    entrypoint: ["/bin/bash", "-c", "dos2unix <run.sh | bash" ]
     #entrypoint: ["/bin/bash"]
     depends_on:
       - drill
@@ -35,7 +36,8 @@ services:
     hostname: jupyter
     environment:
       - GRANT_SUDO=yes
-      - JUPYTER_ENABLE_LAB=yes       
+      - JUPYTER_ENABLE_LAB=yes 
+      - JUPYTER_TOKEN=SU2orange!               
     ports:
       - "8888:8888"
     volumes: 

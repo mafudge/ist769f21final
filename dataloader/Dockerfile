@@ -4,7 +4,8 @@ RUN apt-get update && apt-get install -y \
     gnupg \
     curl \
     wget \
-    nano
+    nano \
+    dos2unix
 
 RUN curl https://dl.min.io/client/mc/release/linux-amd64/mc \
     --create-dirs -o /usr/local/bin/mc &&  \
